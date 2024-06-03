@@ -1,0 +1,40 @@
+CREATE TABLE users (
+	sid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	sfname VARCHAR(20),
+	slname VARCHAR(20),
+	semail VARCHAR(255),
+	sphone VARCHAR(10),
+	saddress VARCHAR(255),
+	spassword TEXT,
+	regdate DATE NULL DEFAULT CURRENT_TIMESTAMP,
+);
+
+CREATE TABLE admins (
+	aid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	afname VARCHAR(20),
+	alname VARCHAR(20),
+	aemail VARCHAR(255),
+	aphone VARCHAR(10),
+	apassword TEXT
+);
+
+CREATE TABLE menus (
+	mid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mname VARCHAR(50),
+	mdesc VARCHAR(255),
+	mprice DECIMAL(10,2),
+	mimage VARCHAR(255)
+);
+
+CREATE TABLE orders (
+	oid  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	onum INT,
+	sid INT,
+	mid INT,
+	quantity INT,
+	amount DECIMAL(10,2),
+	date DATE NULL DEFAULT CURRENT_TIMESTAMP,
+	status VARCHAR(20),
+	FOREIGN KEY (sid) REFERENCES users (sid),
+	FOREIGN KEY (mid) REFERENCES menus (mid)
+);
